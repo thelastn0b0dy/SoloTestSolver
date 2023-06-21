@@ -7,6 +7,9 @@ struct node {
     vector<node> childs;
 };
 
+void CreateBranch(uint8_t code, node& parent, uint8_t x, uint8_t y);
+void FindLegalMoves(node& parent);
+
 node Root;
 uint8_t  CurrentMatrix[9][9]; //CurrentMatrix [x][y]
 
@@ -49,7 +52,7 @@ void  PrintMatrix(uint8_t MatrixToPrint[9][9]){
     }
 }
 
-void CreateBranch(uint8_t code, node& parent, uint8_t x, uint8_t y){
+void CreateBranch(uint8_t code, node& _Parent, uint8_t x, uint8_t y){
   CurrentMatrix[x][y] = 2;
   switch(code){
     case 0:
@@ -72,7 +75,7 @@ void CreateBranch(uint8_t code, node& parent, uint8_t x, uint8_t y){
   }
   node Branch;
   Matrixcpy(Branch.data,CurrentMatrix);
-  parent.childs.push_back(Branch);
+  _Parent.childs.push_back(Branch);
   FindLegalMoves(Branch);
 }
 
@@ -104,7 +107,7 @@ int main()
     CreateMatrix();
     Matrixcpy(Root.data, CurrentMatrix);
     FindLegalMoves(Root);
-    
+
     
     return 0;
 }
