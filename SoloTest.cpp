@@ -50,7 +50,7 @@ void  PrintMatrix(uint8_t MatrixToPrint[9][9]){
 }
 
 void CreateBranch(uint8_t code, node& parent, uint8_t x, uint8_t y){
-  if(code != 5) CurrentMatrix[x][y] = 2;
+  CurrentMatrix[x][y] = 2;
   switch(code){
     case 0:
       CurrentMatrix[x+1][y] = 2;
@@ -83,17 +83,17 @@ void FindLegalMoves(node& parent){
        for(uint8_t y=0; y<9; y++){
           if(!(Branch[x][y] == 1)) break;
           if(Branch[x+1][y] == 1 && Branch[x+2][y] == 1 && Branch[x+3][y] == 1) {
-          
+            CreateBranch(0, parent,x,y);
           }
           if(Branch[x-1][y] == 1 && Branch[x-2][y] == 1 && Branch[x-3][y] == 1) {
-
+            CreateBranch(1, parent,x,y);
           }
 
           if(Branch[x+1][y] == 1 && Branch[x+2][y] == 1 && Branch[x][y+3] == 2) {
-
+            CreateBranch(2, parent,x,y);
           }
           if(Branch[x-1][y] == 1 && Branch[x-2][y] == 1 && Branch[x][y-3] == 2) {
-
+            CreateBranch(3, parent,x,y);
           }
         }
       }
@@ -103,6 +103,8 @@ int main()
 {
     CreateMatrix();
     Matrixcpy(Root.data, CurrentMatrix);
+    FindLegalMoves(Root);
+    
     
     return 0;
 }
