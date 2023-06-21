@@ -1,4 +1,4 @@
 # SoloTestSolver
 A Program that bruteforces all solutions for solo test 
 
-(Not even finished half of what i should do yet, it wont even compile)
+(Not even finished half of what i should do yet)
